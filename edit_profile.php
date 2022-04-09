@@ -63,7 +63,7 @@
 		<table>
 			<tr>
 				<td>
-					<h3>Edit information of students</h3>
+					<h3>Edit information of user</h3>
 				</td>
 			</tr>
 			<?php

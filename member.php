@@ -16,8 +16,6 @@ if (isset($_SESSION['username'])) {
 }
 
 ?>
-
-<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
@@ -35,8 +33,8 @@ if (isset($_SESSION['username'])) {
 
         <div class="collapse navbar-collapse" >
             <ul class="navbar-nav mr-8 mt-8 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item active">
+                    <a href="profile.php?id=<?php echo $row['id']; ?>&role=<?php echo $row['role']; ?>" class="nav-link" href="#"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp; Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="member.php">Danh sách người dùng</a>
@@ -61,12 +59,13 @@ if (isset($_SESSION['username'])) {
 
     <div class="container" style="margin-top: 20%;">
     <h2>Danh sách người dùng</h2>
-    <?php $row = mysqli_fetch_array($result_student) ?>
-    <?php if ($row['role']==="teacher"): ?>
-                    <a href="register.php" >
-                        <button style="width: 200px; margin-bottom: 20px" type="button" ><i class="fa fa-plus"></i> Thêm mới</button>
-                    </a>
-                <?php endif; ?>
+    <?php
+    if ($row['role'] === "teacher") {
+        echo '<a href="register.php"> <button style="width: 200px; margin-bottom: 20px" type="button" > <i class="fa fa-plus"></i> Thêm mới</button></a>';
+    }
+    
+?>
+    
     <table class="table table-bordered">
     <tr>
         <th>Username</th>
@@ -91,7 +90,5 @@ if (isset($_SESSION['username'])) {
     </table>
     </div>
 </div>
-
-
 </body>
 </html>

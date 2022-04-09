@@ -55,35 +55,7 @@
         </div>
     </nav>
 
-    <div class="example" style="margin-top: 20%;">
-        <div class="container">
-            <div class="row">
-                <h2>Danh sách người dùng</h2>
-                <?php if ($_SESSION['username']['roleId']==1): ?>
-                    <a href="index.php?controller=username&action=register" >
-                        <button style="width: 100px; margin-bottom: 20px" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Thêm mới</button>
-                    </a>
-                <?php endif; ?>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Tên tài khoản</th>
-                            <th>Họ và tên</th>
-                            <th>Avatar</th>
-                            <th>Hành Động</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    
 
 </div>
 

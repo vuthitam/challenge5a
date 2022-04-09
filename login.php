@@ -12,7 +12,7 @@
 				</div>
 
 				<div class="table">
-					<h1>Student Management Login</h1>
+					<h1>Đăng nhập</h1>
 					<form action="login.php" class="text-center" method='POST'>
                         <div><input type="text" name="username" placeholder="User Name" required/></div>
                         <input type="password" name="password" placeholder="Password" required/>
