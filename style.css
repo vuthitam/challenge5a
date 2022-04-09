@@ -1,0 +1,24 @@
+.button {
+    background-color: #e3fb08;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+      
+.button:hover {
+    opacity: 0.8;
+}
+.form {
+    width: 300px;
+    border: 2px solid rgb(99, 255, 99);
+    padding: 20px;
+    margin: 0 auto;
+    font-weight: 600px;
+}
+.form input {
+    width: 100%;
+    padding: 10px 0;
+}
