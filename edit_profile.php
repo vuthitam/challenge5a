@@ -1,5 +1,7 @@
 <?php
-	session_start();
+	if(!isset($_SESSION)){
+ 		session_start();
+	}
 	if (!isset($_SESSION['username'])) {
 		echo '<script language="javascript">alert("You need login first!"); window.location="login.php"</script>';
 	}
@@ -13,7 +15,7 @@
 <title>List</title>
 </head>
 <body>
-
+<?php include("header.php") ?>
 <?php
 
 	if (isset($_GET['id'])) {
@@ -39,8 +41,11 @@
 		echo '<script language="javascript">alert("Profile edited!"); window.location="index.php"</script>';
 	}
 
-	if (isset($_GET['role'])) {
-		$role = $_GET['role'];
+	if (isset($_SESSION['role'])) {
+		$role = $_SESSION['role'];
+	}
+	else {
+		echo '<script language="javascript">alert("You must login first!"); window.location="login.php"</script>';
 	}
 
 	$username = $_SESSION['username'];

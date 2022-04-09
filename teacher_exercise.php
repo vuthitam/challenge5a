@@ -1,5 +1,7 @@
 <?php
-	session_start();
+	if(!isset($_SESSION)){
+        session_start();
+    }
 	if (!isset($_SESSION['username'])) {
 		echo '<script language="javascript">alert("You need login first!"); window.location="login.php"</script>';
 	} else {
@@ -9,6 +11,7 @@
 
     date_default_timezone_set('Asia/Ho_Chi_Minh');
     $exercise_date = date('l jS F Y h:i:s A');
+                        //Sunday 10th April 2022 12:25:19 AM
 
     if(isset($_POST["submit"])) {
 
@@ -20,32 +23,47 @@
     
         // Check if file already exists
         if (file_exists($exercise_file)) {
-            echo "Sorry, file already exists.";
+            echo '<script language="javascript"> alert("Sorry, file already exists.") </script>';
             $uploadOk = 0;
         }
     
         // Allow certain file formats
         if($exercise_type != "pdf") {
-            echo "Sorry, only PDF files are allowed.";
+            echo '<script language="javascript"> alert("Sorry, only PDF files are allowed.") </script>';
             $uploadOk = 0;
         }
     
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
+            echo '<script language="javascript"> alert("Sorry, there was an error uploading your file (0x2)") </script>';
+
             // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["exercise"]["tmp_name"], $exercise_file)) {
-                $sql_upload_exercise = "INSERT INTO exercise (file_name, type, date, location, teacher) VALUES ('$exercise_name', '$exercise_type', '$exercise_date', '$exercise_file', '$username_teacher')";
-                $connect->query($sql_upload_exercise);
-                echo '<script language="javascript"> alert("Upload exercise success!") </script>';
+                $sql_get_teacher_id = "SELECT id FROM users where username = '$username_teacher'";
+                $result = $connect->query($sql_get_teacher_id);
+                $count = mysqli_num_rows($result);
+                if ($count !== 1) {
+                    //SCREAMM AT USER :) !
+                    exit();
+                }
+                $row = mysqli_fetch_array($result);
+                $teacherId = $row['id'];
+                //echo($exercise_date);
+                $sql_upload_exercise = "INSERT INTO assignments (title, createdAt, files , author, teacherId) VALUES ('$exercise_name', '$exercise_date', '$exercise_file', '$username_teacher', $teacherId)";
+                if($connect->query($sql_upload_exercise)) {
+                    echo '<script language="javascript"> alert("Upload exercise success!") </script>';
+                }
+                else {
+                    echo '<script language="javascript"> alert("Sorry, there was an error uploading your file (0x0)") </script>';
+                }
             } else {
-                echo "Sorry, there was an error uploading your file.";
+                echo '<script language="javascript"> alert("Sorry, there was an error uploading your file (0x1)") </script>';
             }
         }
     }
 
-    $sql_get_submit_exercise = "SELECT * FROM submit_exercise WHERE teacher = '$username_teacher'";
+    $sql_get_submit_exercise = "SELECT * FROM assignments WHERE author = '$username_teacher'";
     $result_get_submit_exercise = $connect->query($sql_get_submit_exercise);
 ?>
 
@@ -57,7 +75,7 @@
 <style type="text/css">
         table, th, td{
             border:1px solid #868585;
-        }
+        }   
         table{
             border-collapse:collapse;
             width:100%;
@@ -80,13 +98,13 @@
     <tr>
         <th>Exercise name</th>
         <th>File exercise submit</th>
-        <th>Student</th>
+        <th>Date created</th>
     </tr>
     <?php while ($row_get_submit_exercise = mysqli_fetch_array($result_get_submit_exercise)): ?>
         <tr>
-            <td><?php echo $row_get_submit_exercise['exercise_name']; ?></td>
-            <td><a href="<?php echo 'http://localhost/Challenge5a_hoaln/'.$row_get_submit_exercise['location']; ?>" download><?php echo $row_get_submit_exercise['submit_exercise_name']; ?></a></td>
-            <td><?php echo $row_get_submit_exercise['student']; ?></td>
+            <td><?php echo $row_get_submit_exercise['title']; ?></td>
+            <td><a href="<?php echo 'http://localhost/Challenge5a/'.$row_get_submit_exercise['files']; ?>" download><?php echo $row_get_submit_exercise['files']; ?></a></td>
+            <td><?php echo $row_get_submit_exercise['createdAt']; ?></td>
         </tr>
     <?php endwhile; ?>
 </table>

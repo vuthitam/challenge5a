@@ -1,19 +1,27 @@
+
+.container{
+
+    background-color: rgb(233, 234, 235);;
+    
+}
+.content{
+    margin-top: 20%;
+}
 .button {
-    background-color: #e3fb08;
-    color: white;
+    background-color: #1adf00;
+    color: rgb(255, 65, 65);
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
     width: 100%;
 }
-      
 .button:hover {
-    opacity: 0.8;
+    opacity: 0.5;
 }
 .form {
     width: 300px;
-    border: 2px solid rgb(99, 255, 99);
+    border: 2px solid rgb(1, 168, 1);
     padding: 20px;
     margin: 0 auto;
     font-weight: 600px;

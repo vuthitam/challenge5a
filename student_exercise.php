@@ -1,5 +1,7 @@
 <?php
-    session_start();
+    if(!isset($_SESSION)){
+        session_start();
+    }
     if (!isset($_SESSION['username'])) {
         echo '<script language="javascript">alert("You need login first!"); window.location="login.php"</script>';
     } else {
@@ -7,7 +9,7 @@
     }
     include("connect.php");
 
-    $sql_exercise = "SELECT * FROM exercise";
+    $sql_exercise = "SELECT * FROM assignments";
     $result = $connect->query($sql_exercise);
 ?>
 
@@ -46,15 +48,13 @@
     <tr>
         <th>File exercise</th>
         <th>Date create</th>
-        <th>Teacher</th>
         <th>Action</th>
     </tr>
     <?php while ($row = mysqli_fetch_array($result)): ?>
         <tr>
-            <td><a href="<?php echo 'http://localhost/Challenge5a_hoaln/'.$row['location']; ?>" download><?php echo $row['file_name']; ?></a></td>
-            <td><?php echo $row['date']; ?></td>
-            <td><?php echo $row['teacher']; ?></td>
-            <td><a href="upload_exercise.php?exercise_file=<?php echo $row['file_name']; ?>&teacher=<?php echo $row['teacher']; ?>">Upload exercise</a></td>
+            <td><a href="<?php echo 'http://localhost/challenge5a/'.$row['files']; ?>" download><?php echo $row['files']; ?></a></td>
+            <td><?php echo $row['createdAt']; ?></td>
+            <td><a href="upload_exercise.php?exercise_file=<?php echo $row['file']; ?>&teacher=<?php echo $row['author']; ?>">Upload exercise</a></td>
         </tr>
     <?php endwhile; ?>
 </table>

@@ -28,7 +28,9 @@
 </html>
 
 <?php
-    session_start();
+    if(!isset($_SESSION)){
+        session_start();
+    }
     header('Content-Type: text/html; charset=UTF-8');
 
     if (isset($_POST['dangnhap'])) {
@@ -49,8 +51,8 @@
         echo "Password wrong. Try again!";
         exit();
         } else {
-
             $_SESSION['username'] = $username;
+            $_SESSION['role'] = $row['role'];
             header("location:index.php");
         }
     } else {

@@ -1,5 +1,7 @@
 <?php
-	session_start();
+	if(!isset($_SESSION)){
+        session_start();
+    }
 	if (!isset($_SESSION['username'])) {
 		echo '<script language="javascript">alert("You need login first!"); window.location="login.php"</script>';
 	} else {
@@ -40,7 +42,7 @@
             // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["exercise"]["tmp_name"], $exercise_submit_location)) {
-                $sql_submit_exercise = "INSERT INTO submit_exercise (student, exercise_name, teacher, submit_exercise_name, location) VALUES ('$username_student', '$exercise_name', '$exercise_teacher', '$exercise_submit_name', '$exercise_submit_location')";
+                $sql_submit_exercise = "INSERT INTO submits (teachername, studentname, title, link, createdAt, updatedAt) VALUES ('$exercise_teacher', '$username_student', '$exercise_submit_name', '$exercise_submit_location')";
                 $connect->query($sql_submit_exercise);
                 echo '<script language="javascript"> alert("Submit exercise success!"); window.location="student_exercise.php" </script>';
             } else {
