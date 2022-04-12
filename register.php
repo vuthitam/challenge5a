@@ -2,26 +2,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="login.css"/>
+
+
 </head>
 <body>
-
-<form method="post" action="register.php" class="form">
-
-<h2>Register new member</h2>
-
-Username: <input type="text" name="username" value="" required>
-
-Password: <input type="text" name="password" value="" required/>
-
-Full name: <input type="text" name="hoten" value="" required/>
-
-Email: <input type="email" name="email" value="" required/>
-
-Phone: <input type="text" name="phone" value="" required/>
-
-<input type="submit" class="button" name="register" value="Register"/>
-</form>
+    <div class="container-reg">
+		
+		<div class="table-register ">
+            <div class="header"><h1>Trang quản lý sinh viên HUST</h1> <br>
+            <h3>One love, one future</h3>
+            </div>
+			
+			<h1>Đăng ký</h1>
+			<form action="register.php" class="text-center" method='POST'>
+                <div>Username: <input type="text" name="username" placeholder="User Name" required/></div><br>
+                Password: <input type="password" name="password" placeholder="Password" required/><br>
+                Full name:  <input type="text" name="hoten" placeholder="Full name" required/><br>
+                Email: <input type="email" name="email" placeholder="Email" required/><br>
+                Phone: <input type="text" name="phone" placeholder="Phone" required/><br>
+                <input type="submit" class="button" name="dangky" value='Đăng ký' />
+			</form>
+                    
+			<div class="line" ></div>
+		</div>
+	</div>
 
 </body>
 </html>
@@ -41,10 +46,8 @@ if(isset($_POST['register'])) {
     $phone = $_POST['phone'];
     $role = "student";
 
-$sql = "INSERT INTO member (username, password, hoten, email, phone, role) VALUES ('$username','$password','$hoten','$email','$phone','$role')";
-mysqli_query($connect, $sql);
-echo '<script language="javascript">alert("Register successed!"); window.location="index.php"</script>';
-
-
+    $sql = "INSERT INTO users (username, password, hoten, email, phone, role) VALUES ('$username','$password','$hoten','$email','$phone','$role')";
+    mysqli_query($connect, $sql);
+    echo '<script language="javascript">alert("Register successed!"); window.location="index.php"</script>';
 }
 ?>

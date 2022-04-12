@@ -12,32 +12,26 @@
     date_default_timezone_set('Asia/Ho_Chi_Minh');
     $exercise_date = date('l jS F Y h:i:s A');
                         //Sunday 10th April 2022 12:25:19 AM
-
     if(isset($_POST["submit"])) {
-
-        $exercise_dir = "uploads/teacher_exercise/";
+        $exercise_dir = "uploads/teacher_assignment/";
         $exercise_file = $exercise_dir . basename($_FILES["exercise"]["name"]);
         $uploadOk = 1;
         $exercise_type = strtolower(pathinfo($exercise_file,PATHINFO_EXTENSION)); // type of exercise
-        $exercise_name = $_FILES['exercise']['name']; // name of exercise
-    
+        $exercise_name = $_FILES['exercise']['name']; // name of exercise   
         // Check if file already exists
         if (file_exists($exercise_file)) {
             echo '<script language="javascript"> alert("Sorry, file already exists.") </script>';
             $uploadOk = 0;
-        }
-    
+        }    
         // Allow certain file formats
         if($exercise_type != "pdf") {
             echo '<script language="javascript"> alert("Sorry, only PDF files are allowed.") </script>';
             $uploadOk = 0;
-        }
-    
+        }    
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
             echo '<script language="javascript"> alert("Sorry, there was an error uploading your file (0x2)") </script>';
-
-            // if everything is ok, try to upload file
+        // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["exercise"]["tmp_name"], $exercise_file)) {
                 $sql_get_teacher_id = "SELECT id FROM users where username = '$username_teacher'";
@@ -62,62 +56,40 @@
             }
         }
     }
-
     $sql_get_submit_exercise = "SELECT * FROM assignments WHERE author = '$username_teacher'";
     $result_get_submit_exercise = $connect->query($sql_get_submit_exercise);
 ?>
-
-<!DOCTYPE html>
-<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-<title>View Exercise</title>
-<style type="text/css">
-        table, th, td{
-            border:1px solid #868585;
-        }   
-        table{
-            border-collapse:collapse;
-            width:100%;
-        }
-        th, td{
-            text-align:center;
-            padding:10px;
-        }
-        table tr:nth-child(odd){
-            background-color:#eee;
-        }
-        table tr:nth-child(even){
-            background-color:white;
-        }
-</style>
+    <title>View Exercise</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 </head>
 <body>
-<h1>List exercise</h1>
-<table>
-    <tr>
-        <th>Exercise name</th>
-        <th>File exercise submit</th>
-        <th>Date created</th>
-    </tr>
-    <?php while ($row_get_submit_exercise = mysqli_fetch_array($result_get_submit_exercise)): ?>
-        <tr>
-            <td><?php echo $row_get_submit_exercise['title']; ?></td>
-            <td><a href="<?php echo 'http://localhost/Challenge5a/'.$row_get_submit_exercise['files']; ?>" download><?php echo $row_get_submit_exercise['files']; ?></a></td>
-            <td><?php echo $row_get_submit_exercise['createdAt']; ?></td>
-        </tr>
-    <?php endwhile; ?>
-</table>
-
-<h1>Upload new exercise</h1>
-<form action="teacher_exercise.php" method="post" enctype="multipart/form-data">
-    <p>Select file to upload:</p>
-    <input type="file" name="exercise">
-    <input type="submit" name="submit" value="Submit">
-</form>
-
-
-
-
+<?php include_once("header.php") ?>
+    <div class="col-md-10 mx-auto container" style="margin-top:10%;">
+        <h1>List exercise</h1>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Exercise name</th>
+                    <th>File exercise submit</th>
+                    <th>Date created</th>
+                </tr>
+            </thead>
+            <?php while ($row_get_submit_exercise = mysqli_fetch_array($result_get_submit_exercise)): ?>
+                <tbody >
+                    <tr>
+                        <td><?php echo $row_get_submit_exercise['title']; ?></td>
+                        <td><a href="<?php echo 'http://localhost/challenge5a/'.$row_get_submit_exercise['files']; ?>" download><?php echo $row_get_submit_exercise['files']; ?></a></td>
+                        <td><?php echo $row_get_submit_exercise['createdAt']; ?></td>
+                    </tr>
+                </tbody>
+            <?php endwhile; ?>
+        </table>
+        <h1>Upload new exercise</h1>
+        <form action="teacher_exercise.php" method="post" enctype="multipart/form-data">
+            <p>Select file to upload:</p>
+            <input type="file" name="exercise">
+            <input type="submit" name="submit" value="Submit">
+        </form>
+    </div>
 </body>
-</html>

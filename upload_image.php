@@ -1,13 +1,13 @@
-<!DOCTYPE html>
 <html>
 <body>
-
-<form action="upload_image.php" method="post" enctype="multipart/form-data">
-Select image to upload:
-<input type="file" name="fileToUpload" id="fileToUpload">
-<input type="submit" value="Upload Image" name="submit">
-</form>
-
+<?php include_once("header.php") ?>
+    <div class="col-md-10 mx-auto " style="margin-top:10%;">
+        <form action="upload_image.php" method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" name="submit">
+        </form>
+    </div>
 </body>
 </html>
 

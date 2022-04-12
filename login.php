@@ -18,8 +18,8 @@
                         <input type="password" name="password" placeholder="Password" required/>
                         <input type="submit" class="button" name="dangnhap" value='Đăng nhập' />
 					</form>
-                    <div class="register" href="register.php">Register</div>
-					<div class="forgot">Forgot password?</div>
+                    <div class="register "><a href="register.php">Register</a></div>
+					<div class="forgot" href="#">Forgot password?</div>
 					<div class="line" ></div>
 				</div>
 			</div>
@@ -32,11 +32,9 @@
         session_start();
     }
     header('Content-Type: text/html; charset=UTF-8');
-
     if (isset($_POST['dangnhap'])) {
     $connect = mysqli_connect ('localhost', 'root', '', 'studentmanage');
     mysqli_set_charset($connect, 'UTF8');
-
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -53,6 +51,7 @@
         } else {
             $_SESSION['username'] = $username;
             $_SESSION['role'] = $row['role'];
+            $_SESSION['id'] = $row['id'];
             header("location:index.php");
         }
     } else {

@@ -1,62 +1,67 @@
 <?php
+    require("redirect.php");
+
     if(!isset($_SESSION)){
- session_start();
-}
-    if (!isset($_SESSION['username'])) {
-        echo '<script language="javascript">alert("You need login first!"); window.location="login.php"</script>';
-    } else {
-        $username = $_SESSION['username'];
+        session_start();
     }
+?>
+
+<?php
+
+	if (!isset($_SESSION['username'])||!isset($_SESSION['id'])||!isset($_SESSION['role'])) {
+		echo '<script language="javascript">alert("You need login first!"); window.location="login.php"</script>';
+	} 
+    else {
+        //data of current user
+        $username = $_SESSION['username'];
+        $id = $_SESSION['id'];
+        $role  = $_SESSION['role'];
+    }
+
     include("connect.php");
 
-    if (isset($_GET['recipient'])) {
-        $recipient = $_GET['recipient'];
-        //get recipient id
-        $sql_get_recipient_id= "SELECT id FROM users WHERE username = '$recipient'";
-        $res = $connect->query($sql_get_recipient_id);
-        if (mysqli_num_rows($res) === 1) {
-            $row = mysqli_fetch_array($res);
-            $recipient_id = $row['id'];
+    if (isset($_GET['id'])){
+        $messageid = $_GET['id'];
+    }
 
-            //get sender id
-            $sql_get_sender_id= "SELECT id FROM users WHERE username = '$username'";
-            $res = $connect->query($sql_get_sender_id);
-            if (mysqli_num_rows($res) === 1) {
-                $row = mysqli_fetch_array($res);
-                $sender_id = $row['id'];
-                
-                if ($recipient_id === $sender_id) {
-                    echo '<script language="javascript">alert("You can not send message to yourself, idiot!"); window.location="member.php"</script>';
-                    exit();
-                }
+    if (isset($_GET['action'])) {
+        if ($_GET['action'] === 'delete') {
+            $sql_delete_message = "DELETE FROM messages WHERE id=$messageid";
+            if ($connect->query($sql_delete_message)) {
+                echo '<script type="text/javascript">alert("Message deleted! You will be send back to previous page.");</script>';
             }
+            else {
+                echo '<script type="text/javascript">alert("Some error occured. You will be send back to previous page.");</script>';
+            }
+            back();
+            exit();
         }
     }
-
-    if (isset($_POST['edit'])) {
-        $message_edit = $_POST['message_edit'];
-        if (!isset($recipient_id) || !isset($sender_id)) {
-            echo '<script language="javascript">alert("Some error occured, no change was made!"); window.location="member.php"</script>';   
+    else {
+        if (isset($_POST['edit'])) {
+            $message_content = $_POST['message_content'];
+            $sql_edit_message = "UPDATE messages
+            SET content = '$message_content'
+            WHERE id=$messageid";
+    
+            if($connect->query($sql_edit_message)) {
+                echo '<script language="javascript">alert("Message edited!")</script>';    
+            }
+            else {
+                echo '<script language="javascript">alert("Some error occured, no change was made!")</script>';
+            }
+            backback();
         }
-        $sql_edit_message = "UPDATE messages
-        SET content = '$message_edit'
-        WHERE idrec = $recipient_id AND idsend = $sender_id
-        ORDER BY createdAt desc
-        limit 1";
-
-        if($connect->query($sql_edit_message)) {
-            echo '<script language="javascript">alert("Message edited!"); window.location="member.php"</script>';   
+    
+        //get targeted message content to display on text box
+        $sql_current_message = "SELECT content FROM messages WHERE id = $messageid";
+        $result = $connect->query($sql_current_message);
+        $row = mysqli_fetch_array($result);
+        if (mysqli_num_rows($result) === 0) {
+            echo '<script language="javascript">alert("Some error occured or you should first created a message, better luck next time bae!")</script>';
+            back();
+            exit();
         }
-        else echo '<script language="javascript">alert("Some error occured, no change was made!"); window.location="member.php"</script>';   
-    }
-
-    //get targeted message content to display on text box
-    $sql_current_message = "SELECT content, idrec FROM messages WHERE username ='$username'";
-    $result = $connect->query($sql_current_message);
-    $row = mysqli_fetch_array($result);
-    if (mysqli_num_rows($result) !== 1) {
-        echo '<script language="javascript">alert("You should first created a message, better luck next time bae!"); window.location="member.php"</script>';
-        exit();
     }
 ?>
 
@@ -72,9 +77,9 @@
     <body>
     <?php include("header.php") ?>
         <div class="container">
-            <form action="edit_message.php?recipient=<?php echo $recipient; ?>" method="post">
+            <form action="edit_message.php?id=<?php echo $messageid; ?>" method="post">
             Edit your message here:<br>
-            <textarea type="text" name="message_edit" rows="9" cols="70"><?php echo $row['content']; ?></textarea>
+            <textarea type="text" name="message_content" rows="9" cols="70"><?php echo $row['content']; ?></textarea>
             <br>
             <input type="submit" name="edit" value="Edit">
             </form>

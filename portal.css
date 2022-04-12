@@ -1,0 +1,103 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+body {
+    background-image: url("https://storage.googleapis.com/hust-files/2021-11-15/5807675312963584/background-new-page_.9m.jpeg");
+    background-position: 50% 50%; /* Center the image */
+    background-size: auto;
+}
+.nav{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    background-color: rgb(255, 251, 251);
+    color: #c40000;
+    position: fixed;
+    top: 0px;
+    z-index: 3;
+}
+
+.public{
+    width: 50%;
+}
+.nav h1{
+    padding-left: 30px;
+    background-image: inherit;
+    flex: 3;
+    font-weight: 900;
+}
+.menu{
+    background-image: inherit;
+    margin-right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.button{
+    text-decoration: none;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    width: 7vw;
+    height: 5vh;
+    border: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    font-weight: 900;
+    cursor: pointer;
+    background-color: rgb(34, 236, 1);
+    color: white;
+}
+.button:hover{
+    opacity: 0.5;
+}
+
+/* CSS */
+.button-18 {
+    text-decoration: none;
+    align-items: center;
+    background-color: #0A66C2;
+    border: 0;
+    border-radius: 100px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 20px;
+    max-width: 480px;
+    min-height: 40px;
+    min-width: 0px;
+    overflow: hidden;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    touch-action: manipulation;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, box-shadow 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+}
+
+.button-18:hover,
+.button-18:focus { 
+  background-color: #16437E;
+  color: #ffffff;
+}
+
+.button-18:active {
+  background: #09223b;
+  color: rgb(255, 255, 255, .7);
+}
+
+.button-18:disabled { 
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, .08);
+  color: rgba(0, 0, 0, .3);
+}

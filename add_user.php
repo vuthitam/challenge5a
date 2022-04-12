@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+    include_once("connect.php")
+    ?>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -6,21 +9,21 @@
 </head>
 <body>
 
-<form method="post" action="register.php" class="form">
+<form method="post" action="add_user.php" class="form">
 
-<h2>Thêm người dùng mới</h2>
+    <h2>Thêm người dùng mới</h2>
 
-Username: <input type="text" name="username" value="" required>
+    Username: <input type="text" name="username" value="" required/>
 
-Password: <input type="text" name="password" value="" required/>
+    Password: <input type="text" name="password" value="" required/>
 
-Họ và tên: <input type="text" name="hoten" value="" required/>
+    Họ và tên: <input type="text" name="hoten" value="" required/>
 
-Email: <input type="email" name="email" value="" required/>
+    Email: <input type="email" name="email" value="" required/>
 
-Phone: <input type="text" name="phone" value="" required/>
+    Phone: <input type="text" name="phone" value="" required/>
 
-<input type="submit" class="button" name="register" value="Thêm"/>
+    <input type="submit" class="button" name="adduser" value="Thêm"/>
 </form>
 
 </body>
@@ -28,12 +31,9 @@ Phone: <input type="text" name="phone" value="" required/>
 
 <?php
 header('Content-Type: text/html; charset=utf-8');
-// Kết nối cơ sở dữ liệu
-$connect = mysqli_connect('localhost', 'root', '', 'studentmanage') or die ('Lỗi kết nối');
-mysqli_set_charset($connect, "utf8");
 
 // Dùng isset để kiểm tra Form
-if(isset($_POST['register'])) {
+if(isset($_POST['adduser'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $hoten = $_POST['hoten'];
@@ -41,10 +41,9 @@ if(isset($_POST['register'])) {
     $phone = $_POST['phone'];
     $role = "student";
 
-$sql = "INSERT INTO users (username, password, hoten, email, phone, role) VALUES ('$username','$password','$hoten','$email','$phone','$role')";
-mysqli_query($connect, $sql);
-echo '<script language="javascript">alert("Register successed!"); window.location="index.php"</script>';
-
+    $sql = "INSERT INTO users (username, password, hoten, email, phone, role) VALUES ('$username','$password','$hoten','$email','$phone','$role')";
+    mysqli_query($connect, $sql);
+    echo '<script language="javascript">alert("Add user successed!"); window.location="index.php"</script>';
 
 }
 ?>

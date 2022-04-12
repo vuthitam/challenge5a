@@ -1,23 +1,22 @@
-
 .container{
-
-    background-color: rgb(233, 234, 235);;
-    
-}
-.content{
-    margin-top: 20%;
+    margin-bottom: 10px;
+    background-color: #eff6ee;
 }
 .button {
-    background-color: #1adf00;
-    color: rgb(255, 65, 65);
+    background-color: #eff6ee;
+    color: rgb(0, 174, 58);
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
     width: 100%;
 }
+
 .button:hover {
     opacity: 0.5;
+}
+.table{
+    width: 50%;   
 }
 .form {
     width: 300px;

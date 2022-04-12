@@ -20,34 +20,10 @@
         $sql = "SELECT id, role FROM users WHERE username = '$username'";
         $result = $connect->query($sql);
         $row = mysqli_fetch_array($result);
-        header("location:header.php");
+        header("location:profile.php");
     } else {
-        header("location:login.php");
+        header("location:portal.php");
     }
 
 ?>
 
-<!--
-
-<?php
-    if ($row['role'] === "teacher") {
-        echo '<a href="teacher_exercise.php">View exercise<br></a>';
-    }
-    if ($row['role'] === "student") {
-        echo '<a href="student_exercise.php">My exercise<br></a>';
-    }
-?>
-<?php
-    if ($row['role'] === "teacher") {
-        echo '<a href="teacher_challenge.php">Upload challenges<br></a>';
-    }
-    if ($row['role'] === "student") {
-        echo '<a href="student_challenge.php">My challenges<br></a>';
-    }
-?>
-<a href="logout.php">Log out<br></a>
-
-
-</body>
-</html>
--->
