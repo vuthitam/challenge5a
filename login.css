@@ -15,6 +15,11 @@
     margin-top: 10%;
 }
 
+.info-res{
+    flex: 1.5;
+    margin-top: 15%;
+}
+
 .header{
     flex: 1;
     height: 50px;
@@ -49,23 +54,33 @@ h3{
     margin-top: 10%;
     flex: 1;
     margin-left: 0%;
-    margin-right: 20%;
-    width: 30%;
-    height: 50vh;
+    margin-right: 18%;
+    width: 25%;
+    height: 60vh;
     border-radius: 5%;
     background-color: white;
     justify-content: center;
     align-items: center;
     
 }
-.table-register{
-    width:  50%;
-    height: 50%;
+.table-res{
+    display: flex;
+    flex-direction: column;
+    margin-top: 3%;
+    flex: 1;
+    margin-left: 0%;
+    margin-right: 10%;
+    width: 35%;
+    height: 85vh;
+    border-radius: 5%;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
 }
 
 input{
     background: transparent;
-    width: 85%;
+    width: 100%;
     padding: 15px 20px;
     margin-left: auto;
     margin-right: auto;
@@ -73,11 +88,21 @@ input{
     border: 1px solid #2e89ff;
     border-radius: 6px;
 }
+.input-res{
+    background: transparent;
+    width: 100%;
+    padding: 15px 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: 1px solid #2e89ff;
+    border-radius: 6px;
+}
 input[type=submit]{
     padding: 10px;
-    width: 85%;
+    width: 70%;
     height: 50px;
-    margin-left: 6%;
+    margin-left: 15%;
     border-radius: 6px;
     border: none;
     color: #fff;
@@ -89,18 +114,20 @@ input[type=submit]:hover{
     background-color: #3c91ff;
 }
 
-.register{
+.login {
     color: #1877f2;
     font-weight: 15;
     cursor: pointer;
-    margin-bottom: 5px;
+    margin-bottom: 5px; 
+    margin-left: 110px;
 }
-.forgot{
+.forgot ,.register{
     color: #1877f2;
     font-weight: 15;
     cursor: pointer;
-    margin-bottom: 5px;
+    margin-bottom: 5px; 
 }
+
 h4{
     color: #1877f2;
     font-weight: 15;

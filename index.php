@@ -15,11 +15,6 @@
         session_start();
     }
     if (isset($_SESSION['username'])) {
-        include("connect.php");
-        $username = $_SESSION['username'];
-        $sql = "SELECT id, role FROM users WHERE username = '$username'";
-        $result = $connect->query($sql);
-        $row = mysqli_fetch_array($result);
         header("location:profile.php");
     } else {
         header("location:portal.php");

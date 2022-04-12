@@ -28,12 +28,13 @@ if (isset($_SESSION['username'])) {
             }
         ?>
     <table class="table table-bordered">
-    <tr>
+    <tr style="text-align:center">
         <th>Username</th>
         <th>Họ và tên</th>
         <th>Email</th>
         <th>Phone</th>
         <th>Chức vụ</th>
+        <th colspan=3 >Hành động</th>
         <!--<th>Message</th>-->
     </tr>
    
@@ -44,10 +45,9 @@ if (isset($_SESSION['username'])) {
             <td><?php echo htmlspecialchars($row['email']); ?></td>
             <td><?php echo htmlspecialchars($row['phone']); ?></td>
             <td><?php echo htmlspecialchars($row['role']); ?></td>
-            <td><button><a href="profile.php?id=<?php echo $row['id']; ?>">Xem chi tiết</a>
-            </button><button><a href="profile.php?id=<?php echo $row['id']; ?>">Edit</a></button></td>
-            
-            <td><a href="send_message.php?recipient=<?php echo $row['username']; ?>">Write</a> <a href="edit_message.php?recipient=<?php echo $row['username']; ?>">Edit</a></td>
+            <td><button><a href="profile.php?id=<?php echo $row['id'];?>">Xem chi tiết</a></button>
+            <td><button><a href="edit_profile.php?id=<?php echo $row['id'];?>">Edit</a></button>
+            <td><button><a href="profile.php?id=<?php echo $row['id'];?>&action=delete">Delete user</a></button>
         </tr>
         <?php endwhile; ?>
     </table>

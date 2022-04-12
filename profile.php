@@ -15,7 +15,6 @@
     else {
         $requestid = $id;
     }
-
     //verify permission
     $self = false;
 
@@ -31,7 +30,67 @@
     if ($id === $requestid) {
         $self = true;
     }
+
 	include("connect.php");
+    require("redirect.php");
+    require("debug.php");
+    if (isset($_GET['action'])) {
+        if ($_GET['action'] === 'delete') {
+            if (!$self) {                       //user can not delete their account
+                if ($role === 'teacher') {      //user must be teacher  
+
+                    $sql_get_user_file = "SELECT * FROM assignments WHERE teacherId=$requestid";
+                    $result_get_user_file = $connect->query($sql_get_user_file);
+                    while ($fetched_row = mysqli_fetch_array($result_get_user_file)) {
+                        $file = $fetched_row['files'];
+                        unlink($file);
+                    }
+
+                    $sql_get_user_file = "SELECT * FROM challenges WHERE teacherid=$requestid";
+                    $result_get_user_file = $connect->query($sql_get_user_file);
+                    while ($fetched_row = mysqli_fetch_array($result_get_user_file)) {
+                        $file = $fetched_row['files'];
+                        unlink($file);
+                    }
+
+                    $sql_get_user_file = "SELECT * FROM submits WHERE studentid=$requestid";
+                    $result_get_user_file = $connect->query($sql_get_user_file);
+                    while ($fetched_row = mysqli_fetch_array($result_get_user_file)) {
+                        $file = $fetched_row['link'];
+                        unlink($file);
+                    }
+                    
+                    $sql_get_user_challenge = "SELECT * FROM challenges WHERE teacherid=$requestid";
+                    $sql_get_user_submit = "SELECT * FROM submits WHERE studentid=$requestid";
+
+                    $sql_delete_user = "DELETE FROM users WHERE id=$requestid";
+                    $sql_delete_user_message = "DELETE FROM messages WHERE idsend=$requestid OR idrec=$requestid";
+                    $sql_delete_user_assignment = "DELETE FROM assignments WHERE teacherId=$requestid";
+                    $sql_delete_user_challenge = "DELETE FROM challenges WHERE teacherid=$requestid";
+                    $sql_delete_user_submit = "DELETE FROM submits WHERE studentid=$requestid";
+                    if(!$connect->query($sql_delete_user)) {
+                        breakpoint($sql_delete_user);
+                        echo '<script language="javascript">alert("Some error occured while deleting user! (0x0)")</script>';
+                    }   
+                    if(!$connect->query($sql_delete_user_message)){
+                        echo '<script language="javascript">alert("Some error occured while deleting user! (0x1)")</script>';
+                    }
+                    if(!$connect->query($sql_delete_user_assignment)){
+                        echo '<script language="javascript">alert("Some error occured while deleting user! (0x2)")</script>';
+                    }
+                    if(!$connect->query($sql_delete_user_challenge)){
+                        echo '<script language="javascript">alert("Some error occured while deleting user! (0x3)")</script>';
+                    }
+                    if(!$connect->query($sql_delete_user_submit)){
+                        echo '<script language="javascript">alert("Some error occured while deleting user! (0x4)")</script>';
+                    }
+
+                    echo '<script language="javascript">alert("User deleted!")</script>';
+                    back();
+                }
+            }
+        }
+    }
 ?>
 
 <html>
@@ -115,7 +174,7 @@
     <div class="container col-md-10 mx-auto" <?=isset($_GET['id'])?'':'style="display:none"'?>>
         <table class="table table-bordered table-striped">
             <tr style="text-align:center">
-                <td>Nội dung tin nhắn
+                <td>Nội dung tin nhắn   
                 <td>Thời gian
                 <td colspan="<?=$self?1:2?>">Hành động
             </tr>

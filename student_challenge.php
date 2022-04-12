@@ -46,19 +46,18 @@
         <?php
             if (isset($_POST['submit'])) {
                 $answer = $_POST['answer'];
-                $realanswer = basename($row['files']);
+                $realanswer = basename($row['files'],'.txt');
 
                 if ($answer === $realanswer) {
-                    echo '<h3 style=" text-color: green;"> Bạn đã trả lời đúng!</h3>';
-                    //'<script language="javascript">alert("Your answer is right, congratulation!");</script>';
-                   
+                    echo '<h3 style=" text-color: green;"> Bạn đã trả lời ĐÚNG!</h3>';
+                    
                     $content = fopen($row['files'], "r");
                     while(!feof($content)) {
                         echo htmlspecialchars(fgets($content), ENT_QUOTES, 'UTF-8'). "<br>";
                     }
                     fclose($content);
                 } else {
-                    echo '<script language="javascript">alert("Your answer is wrong, try again!"); window.location="student_challenge.php"</script>';
+                    echo '<h3 style=" text-color: red;"> Bạn trả lời SAI!</h3>';
                 }
             }
         ?>

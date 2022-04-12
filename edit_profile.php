@@ -28,7 +28,7 @@
 
     include("connect.php");
 
-	$sql = "SELECT * FROM users WHERE id = ".$id;
+	$sql = "SELECT * FROM users WHERE id = ".$requestid;
 	$result = $connect->query($sql);
 	$row = mysqli_fetch_array($result);
 ?>
@@ -43,6 +43,7 @@
 
 <?php
 	require("debug.php");
+	require("redirect.php");
 
 	if (isset($_POST["submit"])) {
 		$password = $_POST["password"];
@@ -65,7 +66,8 @@
 		email = '$email', phone = $phone WHERE id = $id";			
 
 		if ($connect->query($sql_update)) {
-			echo '<script language="javascript">alert("Profile edited!"); window.location="profile.php"</script>';
+			echo '<script language="javascript">alert("Profile edited!")</script>';
+			back();
 		}
 		else {
 			echo '<script language="javascript">alert("Error update database!"); window.location="profile.php"</script>';
