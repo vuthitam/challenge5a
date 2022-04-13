@@ -30,9 +30,7 @@
 
 <?php
 
-// Kết nối cơ sở dữ liệu
-$connect = mysqli_connect('localhost', 'root', '', 'studentmanage') or die ('Lỗi kết nối');
-mysqli_set_charset($connect, "utf8");
+    require("connect.php");
 
 // Dùng isset để kiểm tra Form
 if(isset($_POST['dangky'])) {
