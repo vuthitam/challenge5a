@@ -11,17 +11,15 @@
 <body>
 
 <?php
-    require('debug.php');
     if(!isset($_SESSION)){
-        breakpoint(1);
         session_start();
     }
+    
     if (isset($_SESSION['username'])) {
         echo '<script language="javascript">window.location="profile.php"</script>';
     } else {
         echo '<script language="javascript">window.location="portal.php"</script>';
     }
-
 ?>
 </body>
 </html>

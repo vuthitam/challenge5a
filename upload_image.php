@@ -26,6 +26,9 @@ if(isset($_POST["submit"])) {
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); // type of image
+    $image_name = $_FILES['fileToUpload']['name']; // name of image
+    $image_size = $_FILES['fileToUpload']['size']; // size of image
     $avatar_username = $_SESSION['username'];
 
     // Check if image file is a actual image or fake image

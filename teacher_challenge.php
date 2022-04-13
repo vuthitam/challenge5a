@@ -13,7 +13,9 @@
         $teacherId = $_SESSION['id'];
     }
 	include("connect.php");
-
+    date_default_timezone_set('Asia/Ho_Chi_Minh');
+    $challenge_date = date('l jS F Y h:i:s A');
+                        //Sunday 10th April 2022 12:25:19 AM
     if(isset($_POST["submit"])) {
         $title = $_POST['title'];
         $goiy = $_POST['goiy'];
@@ -40,8 +42,7 @@
             // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["challenge"]["tmp_name"], $challenge_file)) {
-                $sql_upload_challenge = "INSERT INTO challenges (teacherid, title, files, goiy) VALUES ($teacherId, '$title', '$challenge_file', '$goiy' )";
-
+                $sql_upload_challenge = "INSERT INTO challenges (teacherid, title, files, goiy, createdAt) VALUES ($teacherId, '$title', '$challenge_file', '$goiy','$challenge_date')";
                 if($connect->query($sql_upload_challenge)) {
                     echo '<script language="javascript"> alert("Upload challenge success!") </script>';
                 }              

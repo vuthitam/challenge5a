@@ -4,7 +4,6 @@ if(!isset($_SESSION)){
     session_start();
 }
 if (isset($_SESSION['username'])) {
-    include("connect.php");
     $username = $_SESSION['username'];
     $sql = "SELECT id, role FROM users WHERE username = '$username'";
     $result = $connect->query($sql);

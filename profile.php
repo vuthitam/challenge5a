@@ -33,7 +33,7 @@
 
 	include("connect.php");
     require("redirect.php");
-    require("debug.php");
+    //require("debug.php");
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'delete') {
             if (!$self) {                       //user can not delete their account
@@ -69,7 +69,7 @@
                     $sql_delete_user_challenge = "DELETE FROM challenges WHERE teacherid=$requestid";
                     $sql_delete_user_submit = "DELETE FROM submits WHERE studentid=$requestid";
                     if(!$connect->query($sql_delete_user)) {
-                        breakpoint($sql_delete_user);
+                        //breakpoint($sql_delete_user);
                         echo '<script language="javascript">alert("Some error occured while deleting user! (0x0)")</script>';
                     }   
                     if(!$connect->query($sql_delete_user_message)){

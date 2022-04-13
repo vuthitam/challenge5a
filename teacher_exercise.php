@@ -7,7 +7,7 @@
 	} else {
         $username_teacher = $_SESSION['username'];
     }
-	include("connect.php");
+	require("connect.php");
 
     date_default_timezone_set('Asia/Ho_Chi_Minh');
     $exercise_date = date('l jS F Y h:i:s A');
@@ -38,7 +38,6 @@
                 $result = $connect->query($sql_get_teacher_id);
                 $count = mysqli_num_rows($result);
                 if ($count !== 1) {
-                    //SCREAMM AT USER :) !
                     exit();
                 }
                 $row = mysqli_fetch_array($result);

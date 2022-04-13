@@ -63,7 +63,7 @@
 		}
 
 		$sql_update = "UPDATE users SET username = '$username_edit', hoten = '$fullname', password = '$password', 
-		email = '$email', phone = $phone WHERE id = $id";			
+		email = '$email', phone = $phone WHERE id = $requestid";			
 
 		if ($connect->query($sql_update)) {
 			echo '<script language="javascript">alert("Profile edited!")</script>';
