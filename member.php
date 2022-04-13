@@ -12,7 +12,7 @@ if (isset($_SESSION['username'])) {
     $sql_student = "SELECT username, hoten, email, phone, role, id FROM users";
     $result_student = $connect->query($sql_student);
 } else {
-    header("location:login.php");
+    echo '<script language="javascript">window.location="login.php"</script>';
 }
 ?>
 <html>

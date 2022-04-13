@@ -30,7 +30,7 @@
 </html>
 
 <?php
-header('Content-Type: text/html; charset=utf-8');
+
 
 // Dùng isset để kiểm tra Form
 if(isset($_POST['adduser'])) {

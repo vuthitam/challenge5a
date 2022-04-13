@@ -28,9 +28,8 @@
 </html>
 
 <?php
-    //header('Content-Type: text/html; charset=UTF-8');
+    require('connect.php');
     if (isset($_POST['dangnhap'])) {
-        $connect = mysqli_connect ('localhost', 'root', '', 'studentmanage');
         mysqli_set_charset($connect, 'UTF8');
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -38,7 +37,6 @@
         $query = "SELECT * FROM users WHERE username='$username'";
         $result = mysqli_query($connect, $query);
         $count = mysqli_num_rows($result);
-
         if ($count == 1) {
             $row = mysqli_fetch_array($result);
 
@@ -51,10 +49,11 @@
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $row['role'];
                 $_SESSION['id'] = $row['id'];
-                header("location:index.php");
+                echo '<script language="javascript">alert("Login success"); window.location="index.php"</script>';
+                
             }
         } else {
-            echo "The username doesn't consist!";
+            echo '<script language="javascript">alert("Wrong username or password"); window.location="login.php"</script>';
         }
 
         $connect->close();

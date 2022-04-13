@@ -2,5 +2,5 @@
     session_start();
     unset($_SESSION['username']);
     session_destroy();
-    header("location:login.php");
+    echo '<script language="javascript">window.location="login.php"</script>';
 ?>

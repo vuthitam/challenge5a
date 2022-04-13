@@ -9,7 +9,6 @@
     }
     include("connect.php");
 
-    header("Content-type: text/html; charset=utf-8");
     $sql_challenge = "SELECT * FROM challenges JOIN users ON challenges.teacherid=users.id";
     $result = $connect->query($sql_challenge);
 

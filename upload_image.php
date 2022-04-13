@@ -26,9 +26,6 @@ if(isset($_POST["submit"])) {
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); // type of image
-    $image_name = $_FILES['fileToUpload']['name']; // name of image
-    $image_size = $_FILES['fileToUpload']['size']; // size of image
     $avatar_username = $_SESSION['username'];
 
     // Check if image file is a actual image or fake image
@@ -66,14 +63,16 @@ if(isset($_POST["submit"])) {
     } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
             echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-            $sql_upload_image = "UPDATE avatar SET name = '$image_name', size = '$image_size', type = '$imageFileType', location = '$target_file' WHERE username = '$avatar_username'";
+            $sql_upload_image = "UPDATE users SET avatar = '$target_file' WHERE username = '$avatar_username'";
             mysqli_query($connect, $sql_upload_image);
 
-            $sql = "SELECT id, role FROM member WHERE username = '$avatar_username'";
+            $sql = "SELECT id, role FROM users WHERE username = '$avatar_username'";
 	        $result = $connect->query($sql);
 	        $row = mysqli_fetch_array($result);
             $id = $row['id'];
             $role = $row['role'];
+            //echo "<script language=\"javascript\">window.location=\"profile.php?id=$id&role=$role\"</script>"; 
+            //note: echo khong inject bien neu su dung '' nhung se inject bien neu su dung ""
             header("location:profile.php?id=".$id."&role=".$role);
         } else {
             echo "Sorry, there was an error uploading your file.";

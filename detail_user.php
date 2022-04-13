@@ -27,7 +27,8 @@
         <h1>Profile</h1>
         <?php
         if (isset($_POST['change_avatar'])) {
-            header("location:upload_image.php");
+            echo '<script language="javascript">window.location="upload_image.php"</script>';
+            //header("location:upload_image.php");
         }
 
         $sql = "SELECT * FROM users WHERE id = $id";
