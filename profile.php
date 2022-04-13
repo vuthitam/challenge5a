@@ -111,7 +111,7 @@
             $result = $connect->query($sql);
             $row = mysqli_fetch_array($result);
 
-            echo '<img height="250" width="250" src="http://localhost/challenge5a/'.$row['avatar'].'" /><br>
+            echo '<img height="280" width="280" src="http://localhost/challenge5a/'.$row['avatar'].'" /><br>
                     <h4>Profile image </h4>';
 
             if ($approved === true) {

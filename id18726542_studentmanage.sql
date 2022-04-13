@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 12, 2022 lúc 03:33 AM
--- Phiên bản máy phục vụ: 10.4.22-MariaDB
--- Phiên bản PHP: 7.4.27
+-- Máy chủ: localhost:3306
+-- Thời gian đã tạo: Th4 13, 2022 lúc 06:45 PM
+-- Phiên bản máy phục vụ: 10.5.12-MariaDB
+-- Phiên bản PHP: 7.3.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `studentmanage`
+-- Cơ sở dữ liệu: `id18726542_studentmanage`
 --
 
 -- --------------------------------------------------------
@@ -42,10 +43,8 @@ CREATE TABLE `assignments` (
 --
 
 INSERT INTO `assignments` (`id`, `teacherId`, `author`, `title`, `files`, `dueto`, `createdAt`) VALUES
-(4, 1, 'teacher1', 'DA2_20185403_VuThiTam.pdf', 'uploads/teacher_exercise/DA2_20185403_VuThiTam.pdf', NULL, 'Sunday 10th April 2022 12:39:08 AM'),
-(5, 1, 'teacher1', 'Slide.pdf', 'uploads/teacher_exercise/Slide.pdf', NULL, 'Sunday 10th April 2022 01:25:51 PM'),
-(6, 1, 'teacher1', 'DA2_Tam_V3.pdf', 'uploads/teacher_exercise/DA2_Tam_V3.pdf', NULL, 'Sunday 10th April 2022 01:26:28 PM'),
-(7, 1, 'teacher1', 'Bài tập Kim loại kiềm.pdf', 'uploads/teacher_assignment/Bài tập Kim loại kiềm.pdf', NULL, 'Sunday 10th April 2022 11:19:00 PM');
+(11, 1, 'teacher1', 'Assignment week 1.pdf', 'uploads/teacher_assignment/Assignment week 1.pdf', NULL, 'Thursday 14th April 2022 01:17:38 AM'),
+(12, 1, 'teacher1', 'Đề-ôn-luyện-Tết.pdf', 'uploads/teacher_assignment/-ôn-luyện-Tết.pdf', NULL, 'Thursday 14th April 2022 01:17:52 AM');
 
 -- --------------------------------------------------------
 
@@ -59,7 +58,7 @@ CREATE TABLE `challenges` (
   `title` text NOT NULL COMMENT 'Tên challenge',
   `files` varchar(100) NOT NULL COMMENT 'đường dẫn file',
   `goiy` text DEFAULT NULL,
-  `createdAt` varchar(100) NOT NULL COMMENT 'Thời gian tạo'
+  `createdAt` text DEFAULT NULL COMMENT 'Thời gian tạo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -67,7 +66,7 @@ CREATE TABLE `challenges` (
 --
 
 INSERT INTO `challenges` (`id`, `teacherid`, `title`, `files`, `goiy`, `createdAt`) VALUES
-(2, 1, 'non', 'uploads/challenge/chall1.txt', 'cac em con non ga tam', '');
+(6, 1, 'Thơ ca', 'uploads/challenge/banh troi nuoc.txt', 'Bài thơ nói lên thân phận người phụ nữ trong xã hội phong kiến xưa Việt Nam?', 'Thursday 14th April 2022 01:20:19 AM');
 
 -- --------------------------------------------------------
 
@@ -88,18 +87,12 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `content`, `idsend`, `idrec`, `createdAt`) VALUES
-(6, 'lua\r\n', 1, 2, '2022-04-09 15:22:30'),
-(7, 'dddd', 3, 5, '2022-04-11 14:00:34'),
-(8, 'toan lua thoi 123412312312312', 3, 2, '2022-04-11 19:55:48'),
-(9, 'duaty', 3, 2, '2022-04-11 14:03:50'),
-(10, 'lua roi', 3, 2, '2022-04-11 14:06:58'),
-(11, 'duatyy', 3, 2, '2022-04-11 14:08:30'),
-(12, 'dd', 3, 2, '2022-04-11 14:09:58'),
-(13, 'xxxx', 3, 2, '2022-04-11 14:10:38'),
-(16, 'dddd', 3, 1, '2022-04-11 18:09:05'),
-(17, 'dddd', 3, 1, '2022-04-11 18:12:40'),
-(20, 'duaty', 1, 3, '2022-04-11 20:07:09'),
-(21, 'hellogiao vien 2', 1, 2, '2022-04-12 01:00:11');
+(24, 'hello teacher2 from teacher1', 1, 2, '2022-04-13 08:22:17'),
+(25, 'hello ', 1, 3, '2022-04-13 09:15:57'),
+(27, 'hello teacher2 from teacher nmq', 1, 2, '2022-04-13 10:37:58'),
+(28, 'hello teacher from sv tamvt part 2', 3, 1, '2022-04-13 10:43:22'),
+(29, 'good evening teacher', 3, 1, '2022-04-13 10:43:37'),
+(31, 'hello Hồng Anh from Tâm Vt with love', 3, 4, '2022-04-13 18:23:43');
 
 -- --------------------------------------------------------
 
@@ -121,7 +114,10 @@ CREATE TABLE `submits` (
 --
 
 INSERT INTO `submits` (`id`, `studentid`, `assignmentid`, `title`, `link`, `updatedAt`) VALUES
-(1, 3, 4, 'da2demo1.pdf', 'uploads/student_submit/da2demo1.pdf', 'Monday 11th April 2022 01:19:23 AM');
+(7, 3, 11, 'Bài tập submit.pdf', 'uploads/student_submit/Bài tập submit.pdf', 'Thursday 14th April 2022 01:36:54 AM'),
+(8, 3, 12, 'Submit assignment.pdf', 'uploads/student_submit/Submit assignment.pdf', 'Thursday 14th April 2022 01:37:27 AM'),
+(9, 4, 11, 'Slide_final.pdf', 'uploads/student_submit/Slide_final.pdf', 'Thursday 14th April 2022 01:39:41 AM'),
+(10, 4, 12, 'Bao cao CK.pdf', 'uploads/student_submit/Bao cao CK.pdf', 'Thursday 14th April 2022 01:40:08 AM');
 
 -- --------------------------------------------------------
 
@@ -146,11 +142,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `hoten`, `email`, `phone`, `avatar`, `role`, `updatedAt`) VALUES
-(1, 'teacher1', '123456a@A', 'duaty', 'd', 1234634437, 'uploads/image.jpg', 'teacher', '2022-04-10 19:39:45'),
-(2, 'teacher2', 'c0b1d84fd16d13bf53eb5e8b2c197565b569855240b59ad4b7', 'giao vien 2', NULL, NULL, NULL, 'teacher', '2022-04-08 19:56:46'),
-(3, 'student1', 'hoilamgi', 'im a dev', 'xyz@gmail.com', 981770392, 'uploads/image.jpg', 'student', '2022-04-11 18:32:44'),
-(4, 'student2', 'f83e69e4170a786e44e3d32a2479cce9', '', NULL, NULL, NULL, 'student', '2022-04-08 16:37:34'),
-(5, 'tamtit', '123', 'Vũ Thị Tâm', 'tamvuthi2000@gmail.com', 981770392, NULL, 'student', '2022-04-10 09:47:01');
+(1, 'teacher1', '123456a@A', 'teacher1', 'teacher1@gmail.com', 123345, 'uploads/vip.jpg', 'teacher', '2022-04-13 18:13:26'),
+(2, 'teacher2', '123456a@A', 'teacher2', 'teacher2@gmail.com', 19001800, '', 'teacher', '2022-04-13 09:32:01'),
+(3, 'student1', '123456a@A', 'Vũ Thị Tâm', 'student1@gmail.com', 91821212, 'uploads/vip.jpg', 'student', '2022-04-13 18:35:01'),
+(4, 'student2', '123456a@A', 'Nguyễn Hồng Anh', 'nha@gmail.com', 9871, '', 'student', '2022-04-13 10:39:23');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -190,7 +185,8 @@ ALTER TABLE `submits`
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username_unique` (`username`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -200,31 +196,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `challenges`
 --
 ALTER TABLE `challenges`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT cho bảng `submits`
 --
 ALTER TABLE `submits`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

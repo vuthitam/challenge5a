@@ -66,6 +66,10 @@
 <?php include_once("header.php") ?>
     <div class="col-md-10 mx-auto container" style="margin-top:10%;">
         <h1>List exercise</h1>
+
+        <?php while ($row_get_submit_exercise = mysqli_fetch_array($result_get_submit_exercise)): 
+                    $assignmentid = $row_get_submit_exercise['id']; ?>
+
         <table class="table table-bordered table-hover">
             <thead class="thead-light">
                 <tr>
@@ -74,21 +78,43 @@
                     <th>Date created</th>
                 </tr>
             </thead>
-            <?php while ($row_get_submit_exercise = mysqli_fetch_array($result_get_submit_exercise)): ?>
+            
                 <tbody >
                     <tr>
                         <td><?php echo $row_get_submit_exercise['title']; ?></td>
-                        <td><a href="<?php echo 'http://localhost/challenge5a/'.$row_get_submit_exercise['files']; ?>" download><?php echo $row_get_submit_exercise['files']; ?></a></td>
+                        <td><a href="<?php echo 'https://svtamvt.000webhostapp.com/'.$row_get_submit_exercise['files']; ?>" download><?php echo $row_get_submit_exercise['files']; ?></a></td>
                         <td><?php echo $row_get_submit_exercise['createdAt']; ?></td>
                     </tr>
+                    <table class="table table-bordered table-hover" >
+                        <thead class="thead-light">
+                            <tr> 
+                                <th>Student name </th>
+                                <th>Url file submit </th>
+                                <th>Time submited </th>
+                            <tr>
+                        </thead>     
+                        <?php $sql_get_student_submit = "SELECT * FROM submits JOIN users ON submits.studentid=users.id WHERE (submits.studentid= users.id) AND (submits.assignmentid=".$assignmentid.")";
+                        $result_get_student_submit = $connect->query($sql_get_student_submit); 
+                        while ($row_get_student_submit = mysqli_fetch_array($result_get_student_submit)): ?>
+                        <tbody>
+                            <tr>
+                                <td> <?php echo $row_get_student_submit['username']; ?> </td>
+                                <td><a href="<?php echo 'https://svtamvt.000webhostapp.com/'.$row_get_student_submit['link']; ?>" download><?php echo $row_get_student_submit['link']; ?></a></td>
+                                <td> <?php echo $row_get_student_submit['updatedAt']; ?> </td>
+                            </tr>
+                        </tbody>
+                        <?php endwhile; ?>
+                    </table> <br>
                 </tbody>
-            <?php endwhile; ?>
+            
         </table>
+        <?php endwhile; ?>
         <h1>Upload new exercise</h1>
         <form action="teacher_exercise.php" method="post" enctype="multipart/form-data">
             <p>Select file to upload:</p>
             <input type="file" name="exercise">
             <input type="submit" name="submit" value="Submit">
         </form>
+        
     </div>
 </body>

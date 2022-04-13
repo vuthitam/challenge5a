@@ -49,11 +49,12 @@
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $row['role'];
                 $_SESSION['id'] = $row['id'];
-                echo '<script language="javascript">alert("Login success"); window.location="index.php"</script>';
-                
+                //echo '<script language="javascript">alert("Login success"); window.location="index.php"</script>';
+                header("location:index.php");
             }
         } else {
-            echo '<script language="javascript">alert("Wrong username or password"); window.location="login.php"</script>';
+            //echo '<script language="javascript">alert("Wrong username or password"); window.location="login.php"</script>';
+            echo '<h2 style="text-color:red;">Thông tin đăng nhập không đúng</h2>';
         }
 
         $connect->close();

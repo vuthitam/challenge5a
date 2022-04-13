@@ -1,17 +1,17 @@
 <?php
     include_once("connect.php")
     ?>
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+<?php require_once("header.php"); ?>
+<div class="container col-10 mx-auto" style="margin-top:12vh; padding-top:10vh;">
+<form method="post" action="add_user.php" class="form" >
 
-<form method="post" action="add_user.php" class="form">
-
-    <h2>Thêm người dùng mới</h2>
+    <h4>Thêm người dùng mới</h4>
 
     Username: <input type="text" name="username" value="" required/>
 
@@ -25,13 +25,11 @@
 
     <input type="submit" class="button" name="adduser" value="Thêm"/>
 </form>
-
+</div>
 </body>
 </html>
 
 <?php
-
-
 // Dùng isset để kiểm tra Form
 if(isset($_POST['adduser'])) {
     $username = $_POST['username'];
